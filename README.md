@@ -1,55 +1,59 @@
 *This activity has been created as part of the 42 curriculum by aoqaily.*
 
-# Libft
+# libftprintf
 
 ## Description
-`Libft` is a custom C library that reimplements common C standard library functions and adds utility functions for strings, memory, and linked lists.  
-It is designed for learning how standard functions work internally and for reuse in future projects.
+`libftprintf` is a custom implementation of the standard `printf` function from the C standard library.  
+The goal of this project is to recreate `printf` from scratch, handling a subset of format specifiers while learning about variadic functions, recursion, and memory management in C.  
+
+The library provides `ft_printf()` which supports the following conversions:
+- `%c` : print a single character
+- `%s` : print a string
+- `%p` : print a pointer in hexadecimal format
+- `%d` / `%i` : print integers in base 10
+- `%u` : print unsigned integers
+- `%x` / `%X` : print hexadecimal numbers (lowercase/uppercase)
+- `%%` : print a percent sign
+
+This project reinforces understanding of C fundamentals, variadic arguments (`va_list`), recursion, and writing reusable libraries.
+
+---
 
 ## Instructions
-Compile the library using the provided Makefile:
-
+1. **Compilation**
 ```bash
-make        # Build libft.a
-make clean  # Remove object files
-make fclean # Remove object files and libft.a
-make re     # Rebuild everything
+make
+This will generate libftprintf.a at the root of the repository.
+
+Usage
+Include the header in your C file:
 
 
-Include it in your project:
+#include "ft_printf.h"
+Then you can use ft_printf like the standard printf:
 
-#include "libft.h"
 
-Example:
+size_t counter = 0;
+ft_printf("Hello %s, number: %d\n", "42", 123);
+Clean
 
-char *s = ft_strdup("Hello 42!");
-ft_putendl_fd(s, 1);
-free(s);
+make clean      # remove object files
+make fclean     # remove object files and library
+make re         # fclean + all
+Algorithm & Data Structures
+Algorithm: The implementation uses recursion for number printing (ft_putnbr_pf, ft_puthex_pf) and pointer printing. The format string is parsed character by character, and variadic arguments are handled using va_list.
 
-Compile with:
+Data Structures: size_t counter is used to keep track of the number of characters printed. Strings are handled as null-terminated arrays of char.
 
-gcc main.c -L. -lft -I.
+Flags & Formatting: Auxiliary functions manage null strings, negative numbers, hexadecimal bases, and pointer formatting.
 
 Resources
+C Standard Library documentation
 
-    C Standard Library documentation
+42 Libftprintf project instructions
 
-    Norminette style guide
+Tutorials on va_list and variadic functions
 
-    42 Libft PDF instructions
+Articles on recursion in C
 
-    Tutorials and articles about memory management, strings, and linked lists in C
 
-    AI assistance (ChatGPT) was used for:
-
-        Structuring the header file
-
-        Norminette-compliant formatting
-
-        Makefile suggestions
-
-        README.md draft
-
-Notes on AI usage
-
-AI helped organize and format the code but all function implementations were manually written and verified to comply with the 42 curriculum requirements.
